@@ -32,7 +32,7 @@ public class ChatController {
         chatNotification.setSenderId(savedMsg.getSenderId());
         chatNotification.setRecipientId(savedMsg.getRecipientId());
         chatNotification.setContent(savedMsg.getContent());
-        simpMessagingTemplate.convertAndSendToUser(chatMsg.getRecipientId().toString(), "/queue/messages", chatNotification);;
+        simpMessagingTemplate.convertAndSendToUser(chatMsg.getRecipientId().toString(), "/queue/messages", chatNotification);
     }
 
     @GetMapping("messages/{senderId}/{receiverId}")

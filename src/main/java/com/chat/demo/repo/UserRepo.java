@@ -9,4 +9,6 @@ import com.chat.demo.modal.User;
 
 public interface UserRepo extends JpaRepository<User, Long>{
     List<User> findAllByStatus(Status status);
-}
+
+    List<User> findByFullName(String fullName);
+} 

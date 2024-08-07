@@ -2,6 +2,7 @@ package com.chat.demo.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chat.demo.modal.Status;
@@ -14,11 +15,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
 
+    @Autowired
     private UserRepo userRepo;
     
     public void saveUser(User user){
-        user.setStatus(Status.ONLINE);
-        userRepo.save(user);
+        if(userRepo.findByFullName(user.getFullName()).size() == 0){
+            userRepo.save(user);
+        }
     }
 
     public void disconnect(User user){

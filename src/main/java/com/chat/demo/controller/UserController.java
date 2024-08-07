@@ -22,24 +22,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService uService;
+    @Autowired
+    private UserService uService;
 
     @MessageMapping("/user.addUser")
-    @SendTo("/user/topic")
+    @SendTo("/user/public")
     public User addUser( @Payload User user){
+        System.out.println("addUser called=-=-=-=-=");
+        System.out.println(user.getFullName());
         uService.saveUser(user);
         return user;
     }
 
     @MessageMapping("/user.disconnectUser")
-    @SendTo("/user/topic")
+    @SendTo("/user/public")
     public User disconnect( @Payload User user){
         uService.disconnect(user);
         return user;
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> findConnectedUser(@RequestParam String param) {
+    public ResponseEntity<List<User>> findConnectedUser() {
         return ResponseEntity.ok(uService.findConnectedUser());
     }
     
