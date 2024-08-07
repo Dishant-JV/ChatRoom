@@ -25,9 +25,9 @@ public class WebSocketConfig
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/user");
-		registry.setApplicationDestinationPrefixes("/app");
-		registry.setUserDestinationPrefix("/user");
+		registry.enableSimpleBroker("/user"); // send msg from server to client
+		registry.setApplicationDestinationPrefixes("/app"); //send msg from client to server
+		registry.setUserDestinationPrefix("/user"); // send msg from server to specific client
 	}
 
 	@Override

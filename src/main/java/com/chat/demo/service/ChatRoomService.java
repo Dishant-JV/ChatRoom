@@ -17,7 +17,7 @@ public class ChatRoomService {
 
     private final ChatRoomRepo chatRoomRepo;
 
-    public Optional<String> getChatRoomId(Long senderId, Long receipentId, boolean createRoomIfNotExists) {
+    public Optional<String> getChatRoomId(String senderId, String receipentId, boolean createRoomIfNotExists) {
         return chatRoomRepo.findBySenderIdAndRecipientId(receipentId, senderId).map(ChatRoom::getChatId)
                 .or(() -> {
                     if (createRoomIfNotExists) {
@@ -28,7 +28,7 @@ public class ChatRoomService {
                 });
     }
 
-    private String createChatId(Long senderId, Long receipentId) {
+    private String createChatId(String senderId, String receipentId) {
         var chatId = String.format("%s_%s", senderId.toString(), receipentId.toString());
         ChatRoom sender = new ChatRoom();
         ChatRoom receiver = new ChatRoom();

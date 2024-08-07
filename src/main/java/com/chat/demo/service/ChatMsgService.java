@@ -23,7 +23,7 @@ public class ChatMsgService {
         return chatMsgRepo.save(chatMsg);
     }
 
-    public List<ChatMsg> listOfMsg(Long sId, Long rId) {
+    public List<ChatMsg> listOfMsg(String sId, String rId) {
         var chatId = chatRoomService.getChatRoomId(sId, rId, false);
         return chatId.map(chatMsgRepo::findByChatId).orElse(new ArrayList<>());
     }

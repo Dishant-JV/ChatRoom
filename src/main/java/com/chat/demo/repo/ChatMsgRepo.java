@@ -6,6 +6,6 @@ import com.chat.demo.modal.ChatMsg;
 import java.util.List;
 
 
-public interface ChatMsgRepo extends JpaRepository<ChatMsg,Long>{
+public interface ChatMsgRepo extends JpaRepository<ChatMsg,String>{
     List<ChatMsg> findByChatId(String chatId);
 }

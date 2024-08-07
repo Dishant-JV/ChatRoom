@@ -15,13 +15,13 @@ public class ChatNotification {
 
     @Id
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "sender_id")
-    private Long senderId;
+    private String senderId;
 
     @Column(name = "recipient_id")
-    private Long recipientId;
+    private String recipientId;
 
     @Column(name = "content")
     private String content;

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.chat.demo.modal.ChatRoom;
 
-public interface ChatRoomRepo extends JpaRepository<ChatRoom,Long>{
+public interface ChatRoomRepo extends JpaRepository<ChatRoom,String>{
     
-    Optional<ChatRoom> findBySenderIdAndRecipientId(Long sId,Long rId);
+    Optional<ChatRoom> findBySenderIdAndRecipientId(String sId,String rId);
 }

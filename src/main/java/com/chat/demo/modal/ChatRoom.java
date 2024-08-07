@@ -14,17 +14,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "chat_room")
 public class ChatRoom {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "chat_id")
     private String chatId;
 
     @Column(name = "sender_id")
-    private Long senderId;
+    private String senderId;
 
     @Column(name = "recipient_id")
-    private Long recipientId;
+    private String recipientId;
 
 }

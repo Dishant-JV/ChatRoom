@@ -27,16 +27,27 @@ public class ChatController {
     @MessageMapping("/chat")
     public void processMsg(@Payload ChatMsg chatMsg){
         ChatMsg savedMsg = chatMsgService.save(chatMsg);
-        ChatNotification chatNotification = new ChatNotification();
-        chatNotification.setId(savedMsg.getId());
-        chatNotification.setSenderId(savedMsg.getSenderId());
-        chatNotification.setRecipientId(savedMsg.getRecipientId());
-        chatNotification.setContent(savedMsg.getContent());
-        simpMessagingTemplate.convertAndSendToUser(chatMsg.getRecipientId().toString(), "/queue/messages", chatNotification);
+        simpMessagingTemplate.convertAndSendToUser(
+            chatMsg.getRecipientId(), "/queue/messages",
+                new ChatNotification(
+                        savedMsg.getId().toString(),
+                        savedMsg.getSenderId(),
+                        savedMsg.getRecipientId(),
+                        savedMsg.getContent()
+                )
+        );
+
+        // ChatMsg savedMsg = chatMsgService.save(chatMsg);
+        // ChatNotification chatNotification = new ChatNotification();
+        // chatNotification.setId(savedMsg.getId());
+        // chatNotification.setSenderId(savedMsg.getSenderId());
+        // chatNotification.setRecipientId(savedMsg.getRecipientId());
+        // chatNotification.setContent(savedMsg.getContent());
+        // simpMessagingTemplate.convertAndSendToUser(chatMsg.getRecipientId().toString(), "/queue/messages", chatNotification);
     }
 
     @GetMapping("messages/{senderId}/{receiverId}")
-    public ResponseEntity<List<ChatMsg>> getMethodName(@PathVariable Long senderId,@PathVariable Long receiverId) {
+    public ResponseEntity<List<ChatMsg>> getMethodName(@PathVariable String senderId,@PathVariable String receiverId) {
         return ResponseEntity.ok(chatMsgService.listOfMsg(senderId, receiverId));
     }
     
